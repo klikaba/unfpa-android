@@ -1,9 +1,11 @@
 package ba.klika.unfpa;
 
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.webkit.CookieManager;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
@@ -18,9 +20,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        CookieManager.getInstance().setAcceptCookie(true);
+
         webView = findViewById(R.id.webView);
 
         PWASettingsFactory.addDefaultSettings(this, webView.getSettings());
+
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebViewClient(new WebViewClient());
 
         if (savedInstanceState != null) {
             webView.restoreState(savedInstanceState);
