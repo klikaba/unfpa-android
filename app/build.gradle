@@ -10,7 +10,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "APP_CENTER_SECRET", System.getenv("APP_CENTER_SECRET") ?: '""'
+        def secret = System.getenv("APP_CENTER_SECRET") ?: ""
+        buildConfigField "String", "APP_CENTER_SECRET", '"' + secret + '"'
     }
     buildTypes {
         release {
